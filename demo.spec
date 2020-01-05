@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['demo.py'],
-             pathex=['D:\\Temp_prj\\Python_prj\\DQ-inj20190411'],
+             pathex=['D:\\Temp_prj\\Python_prj\\DQ_TCGen'],
              binaries=[],
              datas=[],
              hiddenimports=[],

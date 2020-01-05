@@ -17,6 +17,14 @@ class Test(QWidget, Ui_Form):
 
     def on_btn_xor_clicked(self):  # 求累加和函数 槽函数的实现 形参需要self 信号连接槽由qt designer自动完成
         tmp = list()
+
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
+            tmp.append(self.spinBox_1.value())
+            tmp.append(self.spinBox_2.value())
+            tmp.append(self.spinBox_3.value())
+        else:
+            pass
+
         tmp.append(self.spinBox_4.value())
         tmp.append(self.spinBox_5.value())
         tmp.append(self.spinBox_6.value())
@@ -52,8 +60,12 @@ class Test(QWidget, Ui_Form):
 
         outfmt = '(卫星格式)'
         if not self.radioButton_1.isChecked():  # 如果选择地检输出 需要补齐256字节
-            for i in range(0, 128 - len(wr_dat)):
-                wr_dat.append('AAAA')
+            if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式 需要128字节
+                for i in range(0, 32 - len(wr_dat)):
+                    wr_dat.append('AAAA')
+            else:  # 选择大气格式需要补齐256字节
+                for i in range(0, 128 - len(wr_dat)):
+                    wr_dat.append('AAAA')
             outfmt = '( 地检格式)'
         else:
             outfmt = '( 卫星格式)'
@@ -79,9 +91,15 @@ class Test(QWidget, Ui_Form):
 
     def on_radio_dpc_cmdfmt(self):   # 数据注入格式
         self.spinBox_4.setValue(0x0a)
+        self.spinBox_1.setValue(0x1690)
 
     def on_radio_dpc_yzfmt(self):  # 载荷工作包格式
         self.spinBox_4.setValue(0x0004)
+        self.spinBox_1.setValue(0x1690)
+
+    def on_radio_gfdpc_yzfmt(self):  # 选择高五注数格式
+        self.spinBox_1.setValue(0x1637)
+        self.spinBox_4.setValue(0x000a)
 
     def on_btn_odu_time_update_1(self):   # 积分时间1修改
         i_time = self.doubleSpinBox_odu_time.value()  # 获取积分时间物理量
@@ -289,6 +307,7 @@ class Test(QWidget, Ui_Form):
         orbit_time = self.doubleSpinBox_orbittime.value()
         orbit_time_dn = orbit_time*60*1000/0.1
         self.spinBox_orbittime_dn.setValue(int(orbit_time_dn))
+
 
 
 if __name__ == '__main__':
