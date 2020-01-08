@@ -1,4 +1,4 @@
-# -*- coding: gb2312 -*-
+# -*- coding: UTF-8 -*-
 __author__ = 'WangYi'
 __version__ = 0.1
 
@@ -15,10 +15,10 @@ class Test(QWidget, Ui_Form):
         super(Test, self).__init__()
         self.setupUi(self)
 
-    def on_btn_xor_clicked(self):  # ÇóÀÛ¼ÓºÍº¯Êı ²Ûº¯ÊıµÄÊµÏÖ ĞÎ²ÎĞèÒªself ĞÅºÅÁ¬½Ó²ÛÓÉqt designer×Ô¶¯Íê³É
+    def on_btn_xor_clicked(self):  # æ±‚ç´¯åŠ å’Œå‡½æ•° æ§½å‡½æ•°çš„å®ç° å½¢å‚éœ€è¦self ä¿¡å·è¿æ¥æ§½ç”±qt designerè‡ªåŠ¨å®Œæˆ
         tmp = list()
 
-        if self.radioButton_gfdpc_yzfmt.isChecked():  # Ñ¡Ôñ¸ßÎå¸ñÊ½
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
             tmp.append(self.spinBox_1.value())
             tmp.append(self.spinBox_2.value())
             tmp.append(self.spinBox_3.value())
@@ -38,8 +38,8 @@ class Test(QWidget, Ui_Form):
 
         self.spinBox_10.setValue(res)
 
-    def on_btn_cmd_fout_clicked(self):  # ²Ûº¯Êı ÎÄ¼şÊä³öº¯Êı
-        self.on_btn_xor_clicked()  # ÏÈÇóÀÛ¼ÓºÍ ÔÙ±£´æÊı¾İ
+    def on_btn_cmd_fout_clicked(self):  # æ§½å‡½æ•° æ–‡ä»¶è¾“å‡ºå‡½æ•°
+        self.on_btn_xor_clicked()  # å…ˆæ±‚ç´¯åŠ å’Œ å†ä¿å­˜æ•°æ®
         tmp = list()
         tmp.append(self.spinBox_1.value())
         tmp.append(self.spinBox_2.value())
@@ -53,22 +53,22 @@ class Test(QWidget, Ui_Form):
         tmp.append(self.spinBox_10.value())
 
         wr_dat = list()
-        for i in tmp:  # ×ª»»Îª×Ö·ûĞÍ
+        for i in tmp:  # è½¬æ¢ä¸ºå­—ç¬¦å‹
             j = hex(i)
-            j = j[2:]  # È¥³ı0x
+            j = j[2:]  # å»é™¤0x
             wr_dat.append(j.zfill(4))
 
-        outfmt = '(ÎÀĞÇ¸ñÊ½)'
-        if not self.radioButton_1.isChecked():  # Èç¹ûÑ¡ÔñµØ¼ìÊä³ö ĞèÒª²¹Æë256×Ö½Ú
-            if self.radioButton_gfdpc_yzfmt.isChecked():  # Ñ¡Ôñ¸ßÎå¸ñÊ½ ĞèÒª128×Ö½Ú
+        outfmt = '(å«æ˜Ÿæ ¼å¼)'
+        if not self.radioButton_1.isChecked():  # å¦‚æœé€‰æ‹©åœ°æ£€è¾“å‡º éœ€è¦è¡¥é½256å­—èŠ‚
+            if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼ éœ€è¦128å­—èŠ‚
                 for i in range(0, 32 - len(wr_dat)):
                     wr_dat.append('AAAA')
-            else:  # Ñ¡Ôñ´óÆø¸ñÊ½ĞèÒª²¹Æë256×Ö½Ú
+            else:  # é€‰æ‹©å¤§æ°”æ ¼å¼éœ€è¦è¡¥é½256å­—èŠ‚
                 for i in range(0, 128 - len(wr_dat)):
                     wr_dat.append('AAAA')
-            outfmt = '( µØ¼ì¸ñÊ½)'
+            outfmt = '( åœ°æ£€æ ¼å¼)'
         else:
-            outfmt = '( ÎÀĞÇ¸ñÊ½)'
+            outfmt = '( å«æ˜Ÿæ ¼å¼)'
 
         filename = self.lineEdit_cmd_filename.text() + '.txt'
         f = open(filename, mode='w')
@@ -76,33 +76,36 @@ class Test(QWidget, Ui_Form):
             f.write(i)
         f.close()
 
-        #  ÈÕÖ¾Êä³ö×Ö·û´®×¼±¸
+        # æ—¥å¿—è¾“å‡ºå­—ç¬¦ä¸²å‡†å¤‡
         now = time.strftime('%Y-%m-%d %H:%M:%S ', time.localtime(time.time()))
-        txt_out = now + 'Êä³öÎÄ¼ş' + filename + outfmt
+        txt_out = now + 'è¾“å‡ºæ–‡ä»¶' + filename + outfmt
         self.textBrowser_log.append(txt_out)
 
     def on_btn_odu_gain_update(self):
-        gain = self.doubleSpinBox_odu_gain.value()  # »ñÈ¡ÔöÒæÎïÀíÁ¿
+        gain = self.doubleSpinBox_odu_gain.value()  # è·å–å¢ç›Šç‰©ç†é‡
         G = 76.125 - 76.125/gain
         self.spinBox_odu_gain_hex.setValue(int(G))
         self.spinBox_5.setValue(0x0f02)
         self.spinBox_6.setValue(0x2000 | int(G))
-        self.spinBox_9.setValue(0x0102)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x0502)
+        else:
+            self.spinBox_9.setValue(0x0102)
 
-    def on_radio_dpc_cmdfmt(self):   # Êı¾İ×¢Èë¸ñÊ½
+    def on_radio_dpc_cmdfmt(self):   # æ•°æ®æ³¨å…¥æ ¼å¼
         self.spinBox_4.setValue(0x0a)
         self.spinBox_1.setValue(0x1690)
 
-    def on_radio_dpc_yzfmt(self):  # ÔØºÉ¹¤×÷°ü¸ñÊ½
+    def on_radio_dpc_yzfmt(self):  # è½½è·å·¥ä½œåŒ…æ ¼å¼
         self.spinBox_4.setValue(0x0004)
         self.spinBox_1.setValue(0x1690)
 
-    def on_radio_gfdpc_yzfmt(self):  # Ñ¡Ôñ¸ßÎå×¢Êı¸ñÊ½
+    def on_radio_gfdpc_yzfmt(self):  # é€‰æ‹©é«˜äº”æ³¨æ•°æ ¼å¼
         self.spinBox_1.setValue(0x1637)
         self.spinBox_4.setValue(0x000a)
 
-    def on_btn_odu_time_update_1(self):   # »ı·ÖÊ±¼ä1ĞŞ¸Ä
-        i_time = self.doubleSpinBox_odu_time.value()  # »ñÈ¡»ı·ÖÊ±¼äÎïÀíÁ¿
+    def on_btn_odu_time_update_1(self):   # ç§¯åˆ†æ—¶é—´1ä¿®æ”¹
+        i_time = self.doubleSpinBox_odu_time.value()  # è·å–ç§¯åˆ†æ—¶é—´ç‰©ç†é‡
         i_time_hex = int(i_time * 2)
         self.spinBox_odu_time_hex.setValue(i_time_hex)
         self.spinBox_5.setValue(0x0f05)
@@ -112,10 +115,13 @@ class Test(QWidget, Ui_Form):
         self.spinBox_7.setValue(tmp2)
         tmp2 = tmp1 | 0xeb
         self.spinBox_8.setValue(tmp2)
-        self.spinBox_9.setValue(0x0105)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x0505)
+        else:
+            self.spinBox_9.setValue(0x0105)
 
-    def on_btn_odu_time_update_2(self):   # »ı·ÖÊ±¼ä2ĞŞ¸Ä
-        i_time = self.doubleSpinBox_odu_time.value()  # »ñÈ¡»ı·ÖÊ±¼äÎïÀíÁ¿
+    def on_btn_odu_time_update_2(self):   # ç§¯åˆ†æ—¶é—´2ä¿®æ”¹
+        i_time = self.doubleSpinBox_odu_time.value()  # 
         i_time_hex = int(i_time * 2)
         self.spinBox_odu_time_hex.setValue(i_time_hex)
         self.spinBox_5.setValue(0x0f06)
@@ -125,10 +131,13 @@ class Test(QWidget, Ui_Form):
         self.spinBox_7.setValue(tmp2)
         tmp2 = tmp1 | 0xeb
         self.spinBox_8.setValue(tmp2)
-        self.spinBox_9.setValue(0x0106)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x0506)
+        else:
+            self.spinBox_9.setValue(0x0106)
 
-    def on_btn_odu_time_update_3(self):   # »ı·ÖÊ±¼ä3ĞŞ¸Ä
-        i_time = self.doubleSpinBox_odu_time.value()  # »ñÈ¡»ı·ÖÊ±¼äÎïÀíÁ¿
+    def on_btn_odu_time_update_3(self):   # ç§¯åˆ†æ—¶é—´3ä¿®æ”¹
+        i_time = self.doubleSpinBox_odu_time.value()  # 
         i_time_hex = int(i_time * 2)
         self.spinBox_odu_time_hex.setValue(i_time_hex)
         self.spinBox_5.setValue(0x0f07)
@@ -138,10 +147,13 @@ class Test(QWidget, Ui_Form):
         self.spinBox_7.setValue(tmp2)
         tmp2 = tmp1 | 0xeb
         self.spinBox_8.setValue(tmp2)
-        self.spinBox_9.setValue(0x0107)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x0507)
+        else:
+            self.spinBox_9.setValue(0x0107)
 
-    def on_btn_djmode_clicked(self):  # µç»ú¹¤×÷Ä£Ê½¸üĞÂ
-        # »ñÈ¡µç»úÄ£Ê½
+    def on_btn_djmode_clicked(self):  # ç”µæœºå·¥ä½œæ¨¡å¼æ›´æ–°
+        # è·å–ç”µæœºæ¨¡å¼
         tmp = self.comboBox_djmode.currentIndex()
         if tmp == 0:
             djmode = 0xaa
@@ -150,21 +162,21 @@ class Test(QWidget, Ui_Form):
         else:
             djmode = 0xee
 
-        # »ñÈ¡Âö³å·¢ËÍÄ£Ê½
+        # è·å–è„‰å†²å‘é€æ¨¡å¼
         tmp = self.comboBox_djpulse.currentIndex()
         if tmp == 0:
             djpulse = 0x10
         else:
             djpulse = 0x20
 
-        # »ñÈ¡»ñÈ¡¹¦ÂÊÄ£Ê½
+        # è·å–è·å–åŠŸç‡æ¨¡å¼
         tmp = self.comboBox_djpower.currentIndex()
         if tmp == 0:
             djpower = 0x11
         else:
             djpower = 0x22
 
-        # »ñÈ¡»ñÈ¡Õ¶²¨ÆµÂÊ
+        # è·å–è·å–æ–©æ³¢é¢‘ç‡
         tmp = self.comboBox_djfreq.currentIndex()
         if tmp == 0:  # 20k
             djfreq_H = 0x02
@@ -173,55 +185,67 @@ class Test(QWidget, Ui_Form):
             djfreq_H = 0x01
             djfreq_L = 0x14eb
 
-        # ¸ßµÍ×Ö½ÚÆ´½Ó
+        # é«˜ä½å­—èŠ‚æ‹¼æ¥
         apdata2 = ((djmode << 8) & 0xff00) | djpulse
         apdata3 = ((djpower << 8) & 0xff00) | djfreq_H
         apdata4 = djfreq_L
 
-        # ¸üĞÂÊıÖµ
+        # æ›´æ–°æ•°å€¼
         self.spinBox_5.setValue(0xcc37)
         self.spinBox_6.setValue(apdata2)
         self.spinBox_7.setValue(apdata3)
         self.spinBox_8.setValue(apdata4)
-        self.spinBox_9.setValue(0x1107)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x1507)
+        else:
+            self.spinBox_9.setValue(0x1107)
 
-    def on_btn_djrpm_clicked(self):  # µç»ú×ªËÙÉèÖÃ
+    def on_btn_djrpm_clicked(self):  # ç”µæœºè½¬é€Ÿè®¾ç½®
         self.spinBox_5.setValue(0xcc38)
         self.spinBox_6.setValue(self.spinBox_dj_start_rpm.value())
         self.spinBox_7.setValue(self.spinBox_dj_work_rpm.value())
         self.spinBox_8.setValue(0xebeb)
-        self.spinBox_9.setValue(0x1108)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x1508)
+        else:
+            self.spinBox_9.setValue(0x1108)
 
-    def on_btn_djrelay_clicked(self):  # ÑÓÊ±Ê±¼äÉèÖÃ
+    def on_btn_djrelay_clicked(self):  # å»¶æ—¶æ—¶é—´è®¾ç½®
         self.spinBox_5.setValue(0xcc39)
         self.spinBox_6.setValue(self.spinBox_dj_relay.value())
         self.spinBox_7.setValue(0xebeb)
         self.spinBox_8.setValue(0xebeb)
-        self.spinBox_9.setValue(0x1109)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x1509)
+        else:
+            self.spinBox_9.setValue(0x1109)
 
-    def on_btn_djpos_clicked(self):  # È¦Ö¡Í¬²½Âö³å·¢ËÍÎ»ÖÃÉèÖÃ
+    def on_btn_djpos_clicked(self):  # åœˆå¸§åŒæ­¥è„‰å†²å‘é€ä½ç½®è®¾ç½®
         apdata = ((self.spinBox_dj_loop_width.value() << 8) & 0xff00) | 0xeb
 
         self.spinBox_5.setValue(0xcc3a)
         self.spinBox_6.setValue(self.spinBox_dj_loop_pos.value())
         self.spinBox_7.setValue(self.spinBox_dj_frame_pos.value())
         self.spinBox_8.setValue(apdata)
-        self.spinBox_9.setValue(0x110a)
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # é€‰æ‹©é«˜äº”æ ¼å¼
+            self.spinBox_9.setValue(0x150a)
+        else:
+            self.spinBox_9.setValue(0x110a)
 
 
-    def on_radio_sel_mf501(self):  # °´Å¥Ñ¡Ôñmf501
+    def on_radio_sel_mf501(self):  # æŒ‰é’®é€‰æ‹©mf501
         self.doubleSpinBox_rta.setValue(-6.011)
         self.doubleSpinBox_rtb.setValue(4622.533)
         self.doubleSpinBox_rtc.setValue(-86421.724)
 
 
-    def on_radio_sel_mf61(self):  # °´Å¥Ñ¡Ôñmf61
+    def on_radio_sel_mf61(self):  # æŒ‰é’®é€‰æ‹©mf61
         self.doubleSpinBox_rta.setValue(-4.362)
         self.doubleSpinBox_rtb.setValue(4081.702)
         self.doubleSpinBox_rtc.setValue(-94033.780)
 
 
-    # ÎÂ¶ÈÖµ×ªDNÖµ ÄÚ²¿º¯Êı
+    # æ¸©åº¦å€¼è½¬DNå€¼ å†…éƒ¨å‡½æ•°
     def t2dn(self, temperature, resup=10000 , maxdn=4095):
         t = temperature + 273.15
 
@@ -235,7 +259,7 @@ class Test(QWidget, Ui_Form):
 
         return int(dn)
 
-    # ÎÂ¶ÈÖµ×ªDNÖµ ÄÚ²¿º¯Êı
+    # DNå€¼è½¬æ¸©åº¦å€¼ å†…éƒ¨å‡½æ•°
     def dn2t(self, dn, resup=10000, maxdn=4095):
 
         a = self.doubleSpinBox_rta.value()
@@ -248,7 +272,7 @@ class Test(QWidget, Ui_Form):
 
         return t
 
-    def on_btn_wk_t2dn_clicked(self):  # ÎÂ¶È×ªDN
+    def on_btn_wk_t2dn_clicked(self):  # æ¸©åº¦è½¬DN
         resup = self.spinBox_wk_res_up.value()
         dnmax = self.spinBox_wk_dnmax.value()
 
@@ -257,7 +281,7 @@ class Test(QWidget, Ui_Form):
 
         self.spinBox_temperautre_dn.setValue(dn)
 
-    def on_btn_wk_dn2t_clicked(self):  # DN×ªÎÂ¶È
+    def on_btn_wk_dn2t_clicked(self):  # DNè½¬æ¸©åº¦
         resup = self.spinBox_wk_res_up.value()
         dnmax = self.spinBox_wk_dnmax.value()
 
@@ -267,7 +291,7 @@ class Test(QWidget, Ui_Form):
 
         self.doubleSpinBox_temperautre_t.setValue(t)
 
-    def on_btn_dpcmode_clicked(self):  # ĞŞ¸Ä¹¤×÷Ä£Ê½
+    def on_btn_dpcmode_clicked(self):  # ä¿®æ”¹å·¥ä½œæ¨¡å¼
         mode_index = self.comboBox_dpcmode_1.currentIndex()
         sheet_index = self.comboBox_dpcmode_2.currentIndex()
 
@@ -296,14 +320,14 @@ class Test(QWidget, Ui_Form):
         self.spinBox_9.setValue(0xffff)
 
 
-    def on_btn_orbit_clicked(self):  # ĞŞ¸Ä¹ìµÀĞòºÅ
+    def on_btn_orbit_clicked(self):  # ä¿®æ”¹è½¨é“åºå·
         self.spinBox_5.setValue(0x1106)
         self.spinBox_6.setValue(0xebeb)
         self.spinBox_7.setValue(0xebeb)
         self.spinBox_8.setValue(self.spinBox_orbit.value())
         self.spinBox_9.setValue(0xffff)
 
-    def on_btn_orbit_time_clicked(self): # ¼ÆËã¹ìµÀÖÜÆÚ
+    def on_btn_orbit_time_clicked(self): # è®¡ç®—è½¨é“å‘¨æœŸ
         orbit_time = self.doubleSpinBox_orbittime.value()
         orbit_time_dn = orbit_time*60*1000/0.1
         self.spinBox_orbittime_dn.setValue(int(orbit_time_dn))

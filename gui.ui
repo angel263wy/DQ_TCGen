@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>DQ注数生成软件</string>
+   <string>八院注数生成软件</string>
   </property>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
@@ -424,7 +424,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>11</x>
