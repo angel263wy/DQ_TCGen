@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>八院注数生成软件</string>
+   <string>DQ注数生成软件</string>
   </property>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
@@ -44,7 +44,7 @@
          <number>65535</number>
         </property>
         <property name="value">
-         <number>5776</number>
+         <number>5687</number>
         </property>
         <property name="displayIntegerBase">
          <number>16</number>
@@ -411,7 +411,7 @@
         <string>卫星格式</string>
        </property>
        <property name="checked">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -419,6 +419,9 @@
       <widget class="QRadioButton" name="radioButton_2">
        <property name="text">
         <string>地检格式</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -440,7 +443,7 @@
         <string>DQ-DPC数据注入</string>
        </property>
        <property name="checked">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -457,7 +460,7 @@
         <string>GF-DPC数据注入</string>
        </property>
        <property name="checked">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -1122,9 +1125,9 @@
     <widget class="QPushButton" name="pushButton_wk_t2dn">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>220</x>
        <y>80</y>
-       <width>101</width>
+       <width>81</width>
        <height>23</height>
       </rect>
      </property>
@@ -1135,9 +1138,9 @@
     <widget class="QPushButton" name="pushButton_wk_dn2t">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>220</x>
        <y>120</y>
-       <width>101</width>
+       <width>81</width>
        <height>23</height>
       </rect>
      </property>
@@ -1300,7 +1303,7 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>310</x>
        <y>10</y>
        <width>161</width>
        <height>131</height>
@@ -1413,6 +1416,248 @@
         </widget>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>10</y>
+       <width>231</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>单路加热器设置</string>
+     </property>
+     <widget class="QLabel" name="label_39">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>控制模式</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_wk_htmode">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>50</y>
+        <width>61</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>程控</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>常开</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>常关</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_40">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>热敏序号</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_wk_resnum">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>80</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="suffix">
+       <string/>
+      </property>
+      <property name="prefix">
+       <string/>
+      </property>
+      <property name="maximum">
+       <number>13</number>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_40">
+       <item>
+        <widget class="QLabel" name="label_38">
+         <property name="text">
+          <string>回路号:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinBox_wk_htnum">
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="suffix">
+          <string/>
+         </property>
+         <property name="prefix">
+          <string/>
+         </property>
+         <property name="maximum">
+          <number>13</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_41">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>高温阈值</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_42">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>低温阈值</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_wk_hthigh">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>110</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="suffix">
+       <string/>
+      </property>
+      <property name="prefix">
+       <string/>
+      </property>
+      <property name="maximum">
+       <number>4095</number>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+      <property name="displayIntegerBase">
+       <number>16</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_wk_htlow">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>130</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="suffix">
+       <string/>
+      </property>
+      <property name="prefix">
+       <string/>
+      </property>
+      <property name="maximum">
+       <number>4095</number>
+      </property>
+      <property name="value">
+       <number>4095</number>
+      </property>
+      <property name="displayIntegerBase">
+       <number>16</number>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_wk_htmode">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>50</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>模式修改</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_wk_resnum">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>80</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>热敏修改</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_wk_htthrehold">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>110</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>阈值修改</string>
+      </property>
      </widget>
     </widget>
    </widget>
@@ -1865,8 +2110,8 @@
    <slot>on_btn_wk_dn2t_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>320</x>
-     <y>483</y>
+     <x>292</x>
+     <y>493</y>
     </hint>
     <hint type="destinationlabel">
      <x>636</x>
@@ -1970,6 +2215,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_wk_htmode</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>on_btn_wk_htmode_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>677</x>
+     <y>422</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>818</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_wk_resnum</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>on_btn_wk_resnum_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>698</x>
+     <y>444</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>791</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_wk_htthrehold</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>on_btn_wk_htthrehold_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>682</x>
+     <y>482</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_btn_xor_clicked()</slot>
@@ -1992,5 +2285,8 @@
   <slot>on_radio_sel_mf501()</slot>
   <slot>on_radio_sel_mf61()</slot>
   <slot>on_radio_gfdpc_yzfmt()</slot>
+  <slot>on_btn_wk_htmode_click()</slot>
+  <slot>on_btn_wk_resnum_click()</slot>
+  <slot>on_btn_wk_htthrehold_click()</slot>
  </slots>
 </ui>

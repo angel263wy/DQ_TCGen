@@ -5,6 +5,7 @@ __version__ = 0.1
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 from gui import Ui_Form
+from PyQt5.QtWidgets import QMessageBox
 
 import time
 import math
@@ -332,6 +333,58 @@ class Test(QWidget, Ui_Form):
         orbit_time_dn = orbit_time*60*1000/0.1
         self.spinBox_orbittime_dn.setValue(int(orbit_time_dn))
 
+    def on_btn_wk_htmode_click(self):  # 单路温控模式修改
+        if 0 == self.comboBox_wk_htmode.currentIndex():  # 选择单路加热模式
+            htmode = 0x55
+        elif 1 == self.comboBox_wk_htmode.currentIndex():
+            htmode = 0xf1
+        elif 2 == self.comboBox_wk_htmode.currentIndex():           
+            htmode = 0xa0
+        else:
+            pass
+        
+        htnum = self.spinBox_wk_htnum.value()
+
+        apdata2 = ((htnum << 8) & 0xff00) | (htmode & 0x00ff) # 左移8位 
+        self.spinBox_6.setValue(apdata2) 
+
+        self.spinBox_5.setValue(0x3356)
+        self.spinBox_7.setValue(0xebeb)
+        self.spinBox_8.setValue(0xebeb)
+        self.spinBox_9.setValue(0xffff)
+
+
+    def on_btn_wk_resnum_click(self):  # 热敏电阻与加热器对应关系修改
+        htnum = self.spinBox_wk_htnum.value()
+        resnum = self.spinBox_wk_resnum.value()
+
+        apdata2 = ((htnum << 8) & 0xff00) | (resnum & 0x00ff) # 左移8位 
+        self.spinBox_6.setValue(apdata2)
+
+        self.spinBox_5.setValue(0x3357)
+        self.spinBox_7.setValue(0xebeb)
+        self.spinBox_8.setValue(0xebeb)
+        self.spinBox_9.setValue(0xffff)
+
+
+    def on_btn_wk_htthrehold_click(self):  # 温控阈值调整
+        # 获取高低温阈值
+        htnum = self.spinBox_wk_htnum.value()
+        high_thr = self.spinBox_wk_hthigh.value()
+        low_thr = self.spinBox_wk_htlow.value()
+
+        if high_thr > low_thr :
+            QMessageBox.information(self, '阈值设置异常', 'DN值高温应小于低温')
+        else:            
+            ap2data = ((htnum << 8) & 0xff00) | ((high_thr >> 8) & 0x00ff)  # 高温阈值高8位 放在低8位
+            ap3data = ((high_thr << 8) & 0xff00) | ((low_thr >> 8) & 0x00ff) # 高温阈值低8位 放在高8位   低温阈值高8位 放在低8位
+            ap4data = ((low_thr << 8) & 0xff00) | 0x00eb  # 低温阈值低8位 放在高8位
+
+            self.spinBox_5.setValue(0x3358)
+            self.spinBox_6.setValue(ap2data)
+            self.spinBox_7.setValue(ap3data)
+            self.spinBox_8.setValue(ap4data)
+            self.spinBox_9.setValue(0xffff)
 
 
 if __name__ == '__main__':
