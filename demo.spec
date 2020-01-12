@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['d:\\Temp_prj\\Python_prj\\DQ_TCGen\\demo.py'],
+a = Analysis(['demo.py'],
              pathex=['D:\\Temp_prj\\Python_prj\\DQ_TCGen'],
              binaries=[],
              datas=[],

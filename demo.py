@@ -19,6 +19,7 @@ class Test(QWidget, Ui_Form):
     def on_btn_xor_clicked(self):  # 求累加和函数 槽函数的实现 形参需要self 信号连接槽由qt designer自动完成
         tmp = list()
 
+        # 第一部分 高五大气数据注入的累加和
         if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
             tmp.append(self.spinBox_1.value())
             tmp.append(self.spinBox_2.value())
@@ -39,7 +40,23 @@ class Test(QWidget, Ui_Form):
 
         self.spinBox_10.setValue(res)
 
-    def on_btn_cmd_fout_clicked(self):  # 槽函数 文件输出函数
+        # 第二部分 高五延时注数的累加和
+        foo = list()
+        foo.append(self.spinBox_yz_1.value())
+        foo.append(self.spinBox_yz_2.value())
+        foo.append(self.spinBox_yz_3.value())
+        foo.append(self.spinBox_yz_4.value())
+        foo.append(self.spinBox_yz_5.value())
+        foo.append(self.spinBox_yz_6.value())
+
+        res = 0
+        for i in foo:
+            res = res ^ i
+        
+        self.spinBox_yz_7.setValue(res)
+
+
+    def on_btn_cmd_fout_clicked(self):  # 槽函数 数据注入文件输出函数        
         self.on_btn_xor_clicked()  # 先求累加和 再保存数据
         tmp = list()
         tmp.append(self.spinBox_1.value())
@@ -79,19 +96,64 @@ class Test(QWidget, Ui_Form):
 
         # 日志输出字符串准备
         now = time.strftime('%Y-%m-%d %H:%M:%S ', time.localtime(time.time()))
-        txt_out = now + '输出文件' + filename + outfmt
+        txt_out = now + '数据注入输出文件:' + filename + outfmt
         self.textBrowser_log.append(txt_out)
+
+
+    def on_btn_cmd_g5yz_fout_clicked(self):  # 高五延时注数文件
+        self.on_btn_xor_clicked()  # 先求累加和 再保存数据
+        tmp = list()
+        tmp.append(self.spinBox_yz_1.value())
+        tmp.append(self.spinBox_yz_2.value())
+        tmp.append(self.spinBox_yz_3.value())
+        tmp.append(self.spinBox_yz_4.value())
+        tmp.append(self.spinBox_yz_5.value())
+        tmp.append(self.spinBox_yz_6.value())
+        tmp.append(self.spinBox_yz_7.value())
+        tmp.append(self.spinBox_yz_8.value())
+        tmp.append(self.spinBox_yz_9.value())        
+
+        wr_dat = list()
+        for i in tmp:  # 转换为字符型
+            j = hex(i)
+            j = j[2:]  # 去除0x
+            wr_dat.append(j.zfill(4))
+
+        # 文件输出
+        filename = self.lineEdit_cmd_filename.text() + '.txt'
+        f = open(filename, mode='w')
+        for i in wr_dat:
+            f.write(i)
+        f.close()
+
+        # 日志输出字符串准备
+        now = time.strftime('%Y-%m-%d %H:%M:%S ', time.localtime(time.time()))
+        txt_out = now + '高五延时注入输出文件:' + filename
+        self.textBrowser_log.append(txt_out)
+    
 
     def on_btn_odu_gain_update(self):
         gain = self.doubleSpinBox_odu_gain.value()  # 获取增益物理量
         G = 76.125 - 76.125/gain
         self.spinBox_odu_gain_hex.setValue(int(G))
+        # 数据注入
         self.spinBox_5.setValue(0x0f02)
         self.spinBox_6.setValue(0x2000 | int(G))
-        if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
+        if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五注数格式
             self.spinBox_9.setValue(0x0502)
         else:
             self.spinBox_9.setValue(0x0102)
+        
+        # 高五延时注数
+        self.spinBox_yz_2.setValue(0x0f02)
+        self.spinBox_yz_3.setValue(0x2000 | int(G)) 
+        self.spinBox_yz_4.setValue(0xebeb)
+        self.spinBox_yz_5.setValue(0xebeb)
+        self.spinBox_yz_6.setValue(0x0502)
+
+        self.on_btn_xor_clicked()  # 自动求累加和
+
+
 
     def on_radio_dpc_cmdfmt(self):   # 数据注入格式
         self.spinBox_4.setValue(0x0a)
@@ -109,49 +171,84 @@ class Test(QWidget, Ui_Form):
         i_time = self.doubleSpinBox_odu_time.value()  # 获取积分时间物理量
         i_time_hex = int(i_time * 2)
         self.spinBox_odu_time_hex.setValue(i_time_hex)
+
         self.spinBox_5.setValue(0x0f05)
+        self.spinBox_yz_2.setValue(0x0f05)  # 延时注数
+
         tmp1 = (i_time_hex << 8) & 0xff00
         tmp2 = tmp1 | i_time_hex
         self.spinBox_6.setValue(tmp2)
         self.spinBox_7.setValue(tmp2)
+        self.spinBox_yz_3.setValue(tmp2)
+        self.spinBox_yz_4.setValue(tmp2)
+
         tmp2 = tmp1 | 0xeb
         self.spinBox_8.setValue(tmp2)
+        self.spinBox_yz_5.setValue(tmp2)
+
         if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
             self.spinBox_9.setValue(0x0505)
         else:
             self.spinBox_9.setValue(0x0105)
+        
+        self.spinBox_yz_6.setValue(0x0505)  # 延时
+        self.on_btn_xor_clicked()  # 自动求累加和
+
+
 
     def on_btn_odu_time_update_2(self):   # 积分时间2修改
         i_time = self.doubleSpinBox_odu_time.value()  # 
         i_time_hex = int(i_time * 2)
         self.spinBox_odu_time_hex.setValue(i_time_hex)
         self.spinBox_5.setValue(0x0f06)
+        self.spinBox_yz_2.setValue(0x0f06)  # 延时注数
+
         tmp1 = (i_time_hex << 8) & 0xff00
         tmp2 = tmp1 | i_time_hex
         self.spinBox_6.setValue(tmp2)
         self.spinBox_7.setValue(tmp2)
+        self.spinBox_yz_3.setValue(tmp2)
+        self.spinBox_yz_4.setValue(tmp2)
+
         tmp2 = tmp1 | 0xeb
         self.spinBox_8.setValue(tmp2)
+        self.spinBox_yz_5.setValue(tmp2)
+
         if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
             self.spinBox_9.setValue(0x0506)
         else:
             self.spinBox_9.setValue(0x0106)
+        
+        self.spinBox_yz_6.setValue(0x0506)  # 延时
+        self.on_btn_xor_clicked()  # 自动求累加和
+
 
     def on_btn_odu_time_update_3(self):   # 积分时间3修改
         i_time = self.doubleSpinBox_odu_time.value()  # 
         i_time_hex = int(i_time * 2)
         self.spinBox_odu_time_hex.setValue(i_time_hex)
         self.spinBox_5.setValue(0x0f07)
+        self.spinBox_yz_2.setValue(0x0f07)  # 延时注数
+
         tmp1 = (i_time_hex << 8) & 0xff00
         tmp2 = tmp1 | i_time_hex
         self.spinBox_6.setValue(tmp2)
         self.spinBox_7.setValue(tmp2)
+        self.spinBox_yz_3.setValue(tmp2)
+        self.spinBox_yz_4.setValue(tmp2)
+
+
         tmp2 = tmp1 | 0xeb
         self.spinBox_8.setValue(tmp2)
+        self.spinBox_yz_5.setValue(tmp2)
+
         if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
             self.spinBox_9.setValue(0x0507)
         else:
             self.spinBox_9.setValue(0x0107)
+
+        self.spinBox_yz_6.setValue(0x0507)  # 延时
+        self.on_btn_xor_clicked()  # 自动求累加和
 
     def on_btn_djmode_clicked(self):  # 电机工作模式更新
         # 获取电机模式
@@ -178,11 +275,11 @@ class Test(QWidget, Ui_Form):
             djpower = 0x22
 
         # 获取获取斩波频率
-        tmp = self.comboBox_djfreq.currentIndex()
-        if tmp == 0:  # 20k
+         
+        if 0 == self.comboBox_djfreq.currentIndex():  # 20k
             djfreq_H = 0x02
             djfreq_L = 0x29EB
-        else:   # 20k
+        else:   # 40k
             djfreq_H = 0x01
             djfreq_L = 0x14eb
 
@@ -191,16 +288,28 @@ class Test(QWidget, Ui_Form):
         apdata3 = ((djpower << 8) & 0xff00) | djfreq_H
         apdata4 = djfreq_L
 
-        # 更新数值
+        # 更新数值 数据注入
         self.spinBox_5.setValue(0xcc37)
         self.spinBox_6.setValue(apdata2)
         self.spinBox_7.setValue(apdata3)
         self.spinBox_8.setValue(apdata4)
+
+        # 更新数值 延时注数
+        self.spinBox_yz_2.setValue(0xcc37)
+        self.spinBox_yz_3.setValue(apdata2)
+        self.spinBox_yz_4.setValue(apdata3)
+        self.spinBox_yz_5.setValue(apdata4)
+        self.spinBox_yz_6.setValue(0x1507)
+
+
         if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式
             self.spinBox_9.setValue(0x1507)
         else:
             self.spinBox_9.setValue(0x1107)
 
+        self.on_btn_xor_clicked()  # 自动求累加和
+
+        
     def on_btn_djrpm_clicked(self):  # 电机转速设置
         self.spinBox_5.setValue(0xcc38)
         self.spinBox_6.setValue(self.spinBox_dj_start_rpm.value())
@@ -211,6 +320,15 @@ class Test(QWidget, Ui_Form):
         else:
             self.spinBox_9.setValue(0x1108)
 
+        self.spinBox_yz_2.setValue(0xcc38)
+        self.spinBox_yz_3.setValue(self.spinBox_dj_start_rpm.value())
+        self.spinBox_yz_4.setValue(self.spinBox_dj_work_rpm.value())
+        self.spinBox_yz_5.setValue(0xebeb)
+        self.spinBox_yz_6.setValue(0x1508)
+
+        self.on_btn_xor_clicked()
+
+
     def on_btn_djrelay_clicked(self):  # 延时时间设置
         self.spinBox_5.setValue(0xcc39)
         self.spinBox_6.setValue(self.spinBox_dj_relay.value())
@@ -220,6 +338,16 @@ class Test(QWidget, Ui_Form):
             self.spinBox_9.setValue(0x1509)
         else:
             self.spinBox_9.setValue(0x1109)
+        #延时
+        self.spinBox_yz_2.setValue(0xcc39)
+        self.spinBox_yz_3.setValue(self.spinBox_dj_relay.value())
+        self.spinBox_yz_4.setValue(0xebeb)
+        self.spinBox_yz_5.setValue(0xebeb)
+        self.spinBox_yz_6.setValue(0x1509)
+
+        self.on_btn_xor_clicked()
+
+        
 
     def on_btn_djpos_clicked(self):  # 圈帧同步脉冲发送位置设置
         apdata = ((self.spinBox_dj_loop_width.value() << 8) & 0xff00) | 0xeb
@@ -232,6 +360,15 @@ class Test(QWidget, Ui_Form):
             self.spinBox_9.setValue(0x150a)
         else:
             self.spinBox_9.setValue(0x110a)
+        # 延时
+        self.spinBox_yz_2.setValue(0xcc3a)
+        self.spinBox_yz_3.setValue(self.spinBox_dj_loop_pos.value())
+        self.spinBox_yz_4.setValue(self.spinBox_dj_frame_pos.value())
+        self.spinBox_yz_5.setValue(apdata)
+        self.spinBox_yz_6.setValue(0x150a)
+
+        self.on_btn_xor_clicked()
+
 
 
     def on_radio_sel_mf501(self):  # 按钮选择mf501
@@ -297,28 +434,40 @@ class Test(QWidget, Ui_Form):
         sheet_index = self.comboBox_dpcmode_2.currentIndex()
 
         if mode_index == 0:
-            mode = 0x11
+            apdata = 0x11eb            
         elif mode_index == 1:
-            mode = 0x22
-        else:
+            apdata = 0x22eb
+        elif mode_index == 2:  # 成像模式 开始判断流程表
             mode = 0x33
+            if sheet_index == 0:
+                sheet = 0x0e
+            elif sheet_index == 1:
+                sheet = 0x0f
+            elif sheet_index == 2:
+                sheet = 0x0d
+            else:
+                sheet = 0xeb
 
-        if sheet_index == 0:
-            sheet = 0x0e
-        elif sheet_index == 1:
-            sheet = 0x0f
-        elif sheet_index == 2:
-            sheet = 0x0d
+            apdata = ((mode << 8) & 0xff00) | sheet
+
         else:
-            sheet = 0xeb
-
-        apdata = ((mode << 8) & 0xff00) | sheet
+            pass               
 
         self.spinBox_5.setValue(0x1103)
         self.spinBox_6.setValue(apdata)
         self.spinBox_7.setValue(0xebeb)
         self.spinBox_8.setValue(0xebeb)
         self.spinBox_9.setValue(0xffff)
+
+        #延时
+        self.spinBox_yz_2.setValue(0x1103)
+        self.spinBox_yz_3.setValue(apdata)
+        self.spinBox_yz_4.setValue(0xebeb)
+        self.spinBox_yz_5.setValue(0xebeb)
+        self.spinBox_yz_6.setValue(0xffff)
+
+        self.on_btn_xor_clicked()
+
 
 
     def on_btn_orbit_clicked(self):  # 修改轨道序号
@@ -327,6 +476,14 @@ class Test(QWidget, Ui_Form):
         self.spinBox_7.setValue(0xebeb)
         self.spinBox_8.setValue(self.spinBox_orbit.value())
         self.spinBox_9.setValue(0xffff)
+        #延时
+        self.spinBox_yz_2.setValue(0x1106)
+        self.spinBox_yz_3.setValue(0xebeb)
+        self.spinBox_yz_4.setValue(0xebeb)
+        self.spinBox_yz_5.setValue(self.spinBox_orbit.value())
+        self.spinBox_yz_6.setValue(0xffff)
+
+        self.on_btn_xor_clicked()
 
     def on_btn_orbit_time_clicked(self): # 计算轨道周期
         orbit_time = self.doubleSpinBox_orbittime.value()
