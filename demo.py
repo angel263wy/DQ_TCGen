@@ -433,18 +433,18 @@ class Test(QWidget, Ui_Form):
         mode_index = self.comboBox_dpcmode_1.currentIndex()
         sheet_index = self.comboBox_dpcmode_2.currentIndex()
 
-        if mode_index == 0:
+        if mode_index == 0:  # 在轨存储
             apdata = 0x11eb            
-        elif mode_index == 1:
+        elif mode_index == 1:  # 待机模式
             apdata = 0x22eb
         elif mode_index == 2:  # 成像模式 开始判断流程表
             mode = 0x33
-            if sheet_index == 0:
-                sheet = 0x0e
-            elif sheet_index == 1:
-                sheet = 0x0f
-            elif sheet_index == 2:
-                sheet = 0x0d
+            if sheet_index == 0:  # 独立观测
+                sheet = 0x1e
+            elif sheet_index == 1:  # 交火观测
+                sheet = 0x1f
+            elif sheet_index == 2:  # 受控观测
+                sheet = 0x1d
             else:
                 sheet = 0xeb
 

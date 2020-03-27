@@ -1,0 +1,1 @@
+c:\design\PythonIDE\Python36\Scripts\pyinstaller.exe -F -w demo.py
