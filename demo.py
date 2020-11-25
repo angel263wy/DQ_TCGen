@@ -89,6 +89,12 @@ class Test(QWidget, Ui_Form):
             outfmt = '( 卫星格式)'
 
         filename = self.lineEdit_cmd_filename.text() + '.txt'
+        # 文件头加标识 证明是DQ还是GF
+        if self.radioButton_gfdpc_yzfmt.isChecked() :
+            filename = 'GF-' + filename
+        else:
+            filename = 'DQ-' + filename
+        
         f = open(filename, mode='w')
         for i in wr_dat:
             f.write(i)
@@ -120,7 +126,7 @@ class Test(QWidget, Ui_Form):
             wr_dat.append(j.zfill(4))
 
         # 文件输出
-        filename = self.lineEdit_cmd_filename.text() + '.txt'
+        filename = 'GF-YZ-' + self.lineEdit_cmd_filename.text() + '.txt'
         f = open(filename, mode='w')
         for i in wr_dat:
             f.write(i)

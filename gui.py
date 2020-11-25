@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'e:\WANGYI\TC_GEN\gui.ui'
+# Form implementation generated from reading ui file 'd:\Temp_prj\Python_prj\DQ_TCGen\gui.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -46,14 +46,14 @@ class Ui_Form(object):
         self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
         self.radioButton_dpc_cmdfmt = QtWidgets.QRadioButton(self.layoutWidget1)
-        self.radioButton_dpc_cmdfmt.setChecked(False)
+        self.radioButton_dpc_cmdfmt.setChecked(True)
         self.radioButton_dpc_cmdfmt.setObjectName("radioButton_dpc_cmdfmt")
         self.horizontalLayout_14.addWidget(self.radioButton_dpc_cmdfmt)
         self.radioButton_dpc_yzfmt = QtWidgets.QRadioButton(self.layoutWidget1)
         self.radioButton_dpc_yzfmt.setObjectName("radioButton_dpc_yzfmt")
         self.horizontalLayout_14.addWidget(self.radioButton_dpc_yzfmt)
         self.radioButton_gfdpc_yzfmt = QtWidgets.QRadioButton(self.layoutWidget1)
-        self.radioButton_gfdpc_yzfmt.setChecked(True)
+        self.radioButton_gfdpc_yzfmt.setChecked(False)
         self.radioButton_gfdpc_yzfmt.setObjectName("radioButton_gfdpc_yzfmt")
         self.horizontalLayout_14.addWidget(self.radioButton_gfdpc_yzfmt)
         self.textBrowser_log = QtWidgets.QTextBrowser(Form)
@@ -916,7 +916,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         self.tabWidget.setCurrentIndex(3)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
         self.pushButton_xor.clicked.connect(Form.on_btn_xor_clicked)
         self.pushButton_cmd_fout.clicked.connect(Form.on_btn_cmd_fout_clicked)
         self.pushButton_odu_gain_update.clicked.connect(Form.on_btn_odu_gain_update)
