@@ -43,7 +43,7 @@
      <rect>
       <x>390</x>
       <y>50</y>
-      <width>75</width>
+      <width>71</width>
       <height>23</height>
      </rect>
     </property>
@@ -140,6 +140,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton_clear">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>90</y>
+      <width>71</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>清空日志</string>
+    </property>
    </widget>
   </widget>
   <widget class="QTextBrowser" name="textBrowser_log">
@@ -801,7 +814,7 @@
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>80</y>
+       <y>100</y>
        <width>81</width>
        <height>23</height>
       </rect>
@@ -814,7 +827,7 @@
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>120</y>
+       <y>70</y>
        <width>81</width>
        <height>23</height>
       </rect>
@@ -978,7 +991,7 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>310</x>
+       <x>320</x>
        <y>10</y>
        <width>161</width>
        <height>131</height>
@@ -1096,7 +1109,7 @@
     <widget class="QGroupBox" name="groupBox_4">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>490</x>
        <y>10</y>
        <width>231</width>
        <height>151</height>
@@ -1334,6 +1347,35 @@
        <string>阈值修改</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>130</y>
+       <width>102</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_50">
+      <item>
+       <widget class="QRadioButton" name="radioButton_wk_high">
+        <property name="text">
+         <string>高温</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_wk_low">
+        <property name="text">
+         <string>低温</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
@@ -2248,8 +2290,8 @@
    <slot>on_btn_xor_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>480</x>
-     <y>162</y>
+     <x>650</x>
+     <y>92</y>
     </hint>
     <hint type="destinationlabel">
      <x>151</x>
@@ -2264,8 +2306,8 @@
    <slot>on_btn_cmd_fout_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>560</x>
-     <y>162</y>
+     <x>242</x>
+     <y>351</y>
     </hint>
     <hint type="destinationlabel">
      <x>178</x>
@@ -2280,8 +2322,8 @@
    <slot>on_btn_odu_gain_update()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>112</x>
-     <y>471</y>
+     <x>114</x>
+     <y>492</y>
     </hint>
     <hint type="destinationlabel">
      <x>144</x>
@@ -2328,8 +2370,8 @@
    <slot>on_btn_odu_time_update_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>441</x>
-     <y>414</y>
+     <x>443</x>
+     <y>435</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -2344,8 +2386,8 @@
    <slot>on_btn_odu_time_update_2()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>444</y>
+     <x>514</x>
+     <y>465</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -2360,8 +2402,8 @@
    <slot>on_btn_odu_time_update_3()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>468</x>
-     <y>474</y>
+     <x>470</x>
+     <y>495</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -2376,8 +2418,8 @@
    <slot>on_btn_djmode_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>127</x>
-     <y>521</y>
+     <x>129</x>
+     <y>542</y>
     </hint>
     <hint type="destinationlabel">
      <x>312</x>
@@ -2392,8 +2434,8 @@
    <slot>on_btn_djrpm_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>286</x>
-     <y>464</y>
+     <x>288</x>
+     <y>485</y>
     </hint>
     <hint type="destinationlabel">
      <x>396</x>
@@ -2408,8 +2450,8 @@
    <slot>on_btn_djrelay_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>288</x>
-     <y>521</y>
+     <x>290</x>
+     <y>542</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -2424,8 +2466,8 @@
    <slot>on_btn_djpos_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>527</x>
-     <y>491</y>
+     <x>532</x>
+     <y>512</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -2440,8 +2482,8 @@
    <slot>on_btn_wk_t2dn_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>299</x>
-     <y>471</y>
+     <x>301</x>
+     <y>512</y>
     </hint>
     <hint type="destinationlabel">
      <x>640</x>
@@ -2456,8 +2498,8 @@
    <slot>on_btn_wk_dn2t_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>294</x>
-     <y>514</y>
+     <x>296</x>
+     <y>485</y>
     </hint>
     <hint type="destinationlabel">
      <x>636</x>
@@ -2472,8 +2514,8 @@
    <slot>on_btn_dpcmode_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>246</x>
-     <y>444</y>
+     <x>248</x>
+     <y>465</y>
     </hint>
     <hint type="destinationlabel">
      <x>112</x>
@@ -2488,8 +2530,8 @@
    <slot>on_btn_orbit_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>246</x>
-     <y>494</y>
+     <x>248</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>295</x>
@@ -2504,8 +2546,8 @@
    <slot>on_btn_orbit_time_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>533</x>
-     <y>491</y>
+     <x>535</x>
+     <y>512</y>
     </hint>
     <hint type="destinationlabel">
      <x>642</x>
@@ -2520,8 +2562,8 @@
    <slot>on_radio_sel_mf501()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>88</x>
-     <y>433</y>
+     <x>91</x>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
      <x>348</x>
@@ -2537,7 +2579,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>186</x>
-     <y>433</y>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
      <x>556</x>
@@ -2568,8 +2610,8 @@
    <slot>on_btn_wk_htmode_click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>679</x>
-     <y>451</y>
+     <x>691</x>
+     <y>472</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -2584,8 +2626,8 @@
    <slot>on_btn_wk_resnum_click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>700</x>
-     <y>481</y>
+     <x>712</x>
+     <y>502</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -2600,8 +2642,8 @@
    <slot>on_btn_wk_htthrehold_click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>684</x>
-     <y>511</y>
+     <x>696</x>
+     <y>532</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2616,12 +2658,28 @@
    <slot>on_btn_cmd_g5yz_fout_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>191</x>
-     <y>331</y>
+     <x>193</x>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
      <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>on_btn_clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>690</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>745</x>
+     <y>64</y>
     </hint>
    </hints>
   </connection>
@@ -2651,5 +2709,6 @@
   <slot>on_btn_wk_resnum_click()</slot>
   <slot>on_btn_wk_htthrehold_click()</slot>
   <slot>on_btn_cmd_g5yz_fout_clicked()</slot>
+  <slot>on_btn_clear()</slot>
  </slots>
 </ui>

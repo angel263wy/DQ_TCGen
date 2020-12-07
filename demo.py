@@ -76,6 +76,8 @@ class Test(QWidget, Ui_Form):
             j = j[2:]  # 去除0x
             wr_dat.append(j.zfill(4))
 
+        cmd_code = "".join(wr_dat)  # 字符串拼接 用于显示
+        
         outfmt = '(卫星格式)'
         if not self.radioButton_1.isChecked():  # 如果选择地检输出 需要补齐256字节
             if self.radioButton_gfdpc_yzfmt.isChecked():  # 选择高五格式 需要128字节
@@ -103,7 +105,8 @@ class Test(QWidget, Ui_Form):
         # 日志输出字符串准备
         now = time.strftime('%Y-%m-%d %H:%M:%S ', time.localtime(time.time()))
         txt_out = now + '数据注入输出文件:' + filename + outfmt
-        self.textBrowser_log.append(txt_out)
+        self.textBrowser_log.append(txt_out)        
+        self.textBrowser_log.append("指令码为: " + cmd_code)
 
 
     def on_btn_cmd_g5yz_fout_clicked(self):  # 高五延时注数文件
@@ -424,6 +427,11 @@ class Test(QWidget, Ui_Form):
         dn = self.t2dn(t, resup, dnmax)
 
         self.spinBox_temperautre_dn.setValue(dn)
+        # 将阈值填充到单路加热器设置的阈值中
+        if self.radioButton_wk_low.isChecked():  
+            self.spinBox_wk_htlow.setValue(dn)  # 填充进入低温阈值
+        else:
+            self.spinBox_wk_hthigh.setValue(dn) # 填充进入高温阈值
 
     def on_btn_wk_dn2t_clicked(self):  # DN转温度
         resup = self.spinBox_wk_res_up.value()
@@ -548,6 +556,11 @@ class Test(QWidget, Ui_Form):
             self.spinBox_7.setValue(ap3data)
             self.spinBox_8.setValue(ap4data)
             self.spinBox_9.setValue(0xffff)
+    
+    #  清空日志函数
+    def on_btn_clear(self):
+        self.textBrowser_log.clear()
+    
 
 
 if __name__ == '__main__':
