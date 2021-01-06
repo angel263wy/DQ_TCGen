@@ -1348,7 +1348,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>220</x>
@@ -1639,7 +1639,7 @@
            <number>65535</number>
           </property>
           <property name="value">
-           <number>5687</number>
+           <number>5776</number>
           </property>
           <property name="displayIntegerBase">
            <number>16</number>
